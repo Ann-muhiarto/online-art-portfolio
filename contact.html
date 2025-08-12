@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - My Art Portfolio</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    .contact-section {
+      padding: 4rem 2rem;
+      background: rgba(11, 12, 16, 0.9);
+      color: #C5C6C7;
+      text-align: center;
+    }
+    .contact-form {
+      max-width: 500px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #1F2833;
+      color: #C5C6C7;
+    }
+    .contact-form button {
+      padding: 12px;
+      background: #66FCF1;
+      color: #0B0C10;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #45A29E;
+    }
+    .alt-contact-icons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    .alt-contact-icons a {
+      font-size: 32px;
+      color: #66FCF1;
+      transition: transform 0.3s, color 0.3s;
+    }
+    .alt-contact-icons a:hover {
+      transform: scale(1.3);
+      color: #45A29E;
+    }
+    .submit-message {
+      margin-top: 1rem;
+      color: #66FCF1;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .submit-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <h1 class="logo">Art by <span>Wanjiku</span></h1>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contact-section" data-aos="fade-up">
+    <h2>Let's Connect</h2>
+    <p>Feel free to reach out for commissions, collaborations, or just to say hello!</p>
+
+    <form action="https://formsubmit.co/candylovershie@gmail.com" method="POST" class="contact-form" id="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="#">
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="submit-message" id="submit-message">Your message has been sent!</div>
+
+    <div class="alt-contact-icons">
+      <a href="mailto:candylovershie@gmail.com" target="_blank" rel="noopener noreferrer" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://wa.me/254748192276" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com/w.a.n.j.i_k.u" target="_blank"  rel="noopener noreferrer"title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/Ann-muhiarto" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://youtube.com/@w.a.n.j.i_k.u.a" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    <p style="text-align: center; padding: 20px; color: #C5C6C7">&copy; 2025 Art by Wanjiku. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      const message = document.getElementById("submit-message");
+      message.classList.add("show");
+
+      setTimeout(() => {
+        message.classList.remove("show");
+      }, 4000);
+    });
+  </script>
+</body>
+</html>

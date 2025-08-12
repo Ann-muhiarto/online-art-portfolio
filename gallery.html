@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - My Art Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <h1 class="logo">Art by <span>Wanjiku</span></h1>
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="gallery-container">
+    <h2 class="gallery-title">My Artworks</h2>
+    <div class="gallery-grid">
+      <img src="11.jpg" alt="Artwork 1" class="lightbox-img" data-caption="When your heart starts to ache again, It's like a storm that never learned to end">
+      <img src="3.jpg" alt="Artwork 2" class="lightbox-img" data-caption="Artwork 2">
+      <img src="29.jpg" alt="Artwork 3" class="lightbox-img" data-caption="pretty hurts when worth is weighed in looks,Not in the stories beauty never books.">
+      <img src="28.jpg" alt="Artwork 4" class="lightbox-img" data-caption="">
+      <img src="24.jpg" alt="Artwork 4" class="lightbox-img" data-caption="Peaceful pine ">
+      <img src="27.jpg" alt="Artwork 4" class="lightbox-img" data-caption="Artwork 6">
+      <img src="30.jpg" alt="Artwork 4" class="lightbox-img" data-caption="Artwork 7">
+      <img src="31.png" alt="Artwork 4" class="lightbox-img" data-caption="Artwork 8">
+      <img src="32.jpg" alt="Artwork 4" class="lightbox-img" data-caption="Artwork 9">
+      <img src="33.png" alt="Artwork 4" class="lightbox-img" data-caption="Artwork 10">
+      <img src="34.png" alt="Artwork 4" class="lightbox-img" data-caption="Artwork 11">
+    </div>
+  </main>
+
+  <div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img id="lightbox-img" class="lightbox-content" src="" alt="Artwork">
+  <p id="lightbox-caption" class="caption"></p>
+
+  <!-- Slideshow Buttons -->
+  <button id="prev-btn" class="nav-btn">&#10094;</button>
+  <button id="next-btn" class="nav-btn">&#10095;</button>
+</div>
+
+
+  <footer>
+    <p style="text-align: center; padding: 20px; color: #C5C6C7">&copy; 2025 Art by Wanjiku. All rights reserved.</p>
+  </footer>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxCaption = document.getElementById("lightbox-caption");
+  const closeBtn = document.querySelector(".close");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const images = document.querySelectorAll(".lightbox-img");
+
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    const img = images[index];
+    lightbox.style.display = "flex";
+    lightboxImg.src = img.src;
+    lightboxCaption.textContent = img.getAttribute("data-caption");
+    lightboxCaption.style.opacity = 0;
+    setTimeout(() => {
+      lightboxCaption.style.animation = "fadeIn 0.8s forwards";
+    }, 50);
+    currentIndex = index;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  function showNextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    openLightbox(currentIndex);
+  }
+
+  function showPrevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openLightbox(currentIndex);
+  }
+
+  images.forEach((img, i) => {
+    img.addEventListener("click", () => openLightbox(i));
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  nextBtn.addEventListener("click", showNextImage);
+  prevBtn.addEventListener("click", showPrevImage);
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") showNextImage();
+    if (e.key === "ArrowLeft") showPrevImage();
+  });
+
+  // Swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  lightbox.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        showNextImage(); // Swiped left
+      } else {
+        showPrevImage(); // Swiped right
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
